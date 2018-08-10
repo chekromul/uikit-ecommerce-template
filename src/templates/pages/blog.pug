@@ -1,0 +1,17 @@
+extends /layouts/_informational
+
+block vars
+  -
+    page = {
+      title: 'Blog',
+      breadcrumbs: {}
+    }
+
+    informationalActivePage = 3
+
+block informational
+  div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+
+    each article in articles
+      div
+        +article(article)

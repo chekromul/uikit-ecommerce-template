@@ -1,0 +1,123 @@
+extends /layouts/_pages
+
+block vars
+  -
+    page = {
+      title: 'Cart',
+      breadcrumbs: []
+    }
+
+block pages
+  div.uk-grid-medium(uk-grid)
+
+    //- Items
+    div.uk-width-1-1(class="uk-width-expand@m")
+      div.uk-card.uk-card-default.uk-card-small.tm-ignore-container
+
+        //- Header
+        header(class="uk-card-header " +
+                     "uk-text-uppercase " +
+                     "uk-text-muted " +
+                     "uk-text-center " +
+                     "uk-text-small " +
+                     "uk-visible@m")
+          div.uk-grid-small.uk-child-width-1-2(uk-grid)
+
+            //- Product cell
+            div product
+
+            //- Other cells
+            div
+              div.uk-grid-small.uk-child-width-expand(uk-grid)
+                div price
+                div.tm-quantity-column quantity
+                div sum
+                div.uk-width-auto
+                  div(style="width: 20px;")
+
+        //- Body
+        each product in products
+          if product.isAddedToCart
+            div.uk-card-body
+              div(class="uk-grid-small " +
+                        "uk-child-width-1-1 " +
+                        "uk-child-width-1-2@m " +
+                        "uk-flex-middle"
+                  uk-grid)
+
+                // Product cell
+                div
+                  div.uk-grid-small(uk-grid)
+
+                    //- Image
+                    div.uk-width-1-3
+                      div.tm-ratio.tm-ratio-4-3
+                        a.tm-media-box(href= product.href)
+                          figure.tm-media-box-wrap
+                            if product.image
+                              img(src= product.image.small alt= product.name)
+                            else
+                              +icon("image", "3")(class="uk-text-muted")
+
+                    //- Info
+                    div.uk-width-expand
+                      div.uk-text-meta= product.type
+                      a.uk-link-heading(href= product.href)= product.name
+
+                // Other cells
+                div
+                  div(class="uk-grid-small " +
+                            "uk-child-width-1-1 " +
+                            "uk-child-width-expand@s " +
+                            "uk-text-center"
+                      uk-grid)
+
+                    //- Price
+                    div
+                      div.uk-text-muted(class="uk-hidden@m") Price
+                      div= product.price
+
+                    //- Quantity
+                    div.tm-cart-quantity-column
+                      +quantity(product.id)
+
+                    //- Sum
+                    div
+                      div.uk-text-muted(class="uk-hidden@m") Sum
+                      div= product.price
+
+                    //- Actions
+                    div(class="uk-width-auto@s")
+                      a.uk-text-danger(uk-tooltip="Remove")
+                        +icon("close")
+
+        div.uk-card-footer
+          label
+            span.uk-form-label.uk-margin-small-right Promo Code
+            div.uk-inline
+              a.uk-form-icon.uk-form-icon-flip(href="#" uk-icon="arrow-right")
+              input.uk-input.uk-form-width-small(type="text")
+
+    //- Checkout
+    div.uk-width-1-1.tm-aside-column(class="uk-width-1-4@m")
+      div.uk-card.uk-card-default.uk-card-small.tm-ignore-container(
+        uk-sticky="offset: 30; bottom: true;")
+
+        div.uk-card-body
+
+          div.uk-grid-small(uk-grid)
+            div.uk-width-expand.uk-text-muted Subtotal
+            div $3148
+
+          div.uk-grid-small(uk-grid)
+            div.uk-width-expand.uk-text-muted Discount
+            div.uk-text-danger −$29
+
+        div.uk-card-body
+
+          div.uk-grid-small.uk-flex-middle(uk-grid)
+            div.uk-width-expand.uk-text-muted Total
+            div.uk-text-lead.uk-text-bolder $3119
+
+          a.uk-button.uk-button-primary.uk-margin-small.uk-width-1-1(
+            href="checkout.html") checkout

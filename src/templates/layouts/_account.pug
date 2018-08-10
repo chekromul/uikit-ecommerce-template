@@ -1,0 +1,72 @@
+extends _default
+
+block vars
+
+block default
+  section.uk-section.uk-section-small
+    div.uk-container
+      div.uk-grid-medium(uk-grid)
+
+        //- Profile column
+        div(class="uk-width-1-1 uk-width-1-4@m tm-aside-column")
+          div.uk-card.uk-card-default.uk-card-small.tm-ignore-container
+
+            //- Profile
+            div.uk-card-header
+              div.uk-grid-small.uk-child-width-1-1(uk-grid)
+
+                section
+                  div(class="uk-width-1-3 " +
+                            "uk-width-1-4@s " +
+                            "uk-width-1-2@m " +
+                            "uk-margin-auto " +
+                            "uk-visible-toggle " +
+                            "uk-position-relative " +
+                            "uk-border-circle " +
+                            "uk-overflow-hidden " +
+                            "uk-light")
+                    img.uk-width-1-1(src= profile.image)
+                    a(class="uk-link-reset " +
+                            "uk-overlay-primary " +
+                            "uk-position-cover " +
+                            "uk-hidden-hover"
+                      href="#")
+                      div.uk-position-center
+                        +icon("camera", "1.25")
+
+                div.uk-text-center
+                  div.uk-h4.uk-margin-remove #{profile.firstName} #{profile.lastName}
+                  div.uk-text-meta Joined #{profile.registrationDate}
+
+                div
+                  div.uk-grid-small.uk-flex-center(uk-grid)
+
+                    div
+                      a.uk-button.uk-button-default.uk-button-small(href="settings.html")
+                        +icon("cog", ".75")(class="uk-margin-xsmall-right")
+                        span Settings
+
+                    div
+                      button.uk-button.uk-button-default.uk-button-small(
+                        href="#"
+                        title="Log out")
+                        +icon("sign-out", ".75")
+
+            div
+              nav
+                ul.uk-nav.uk-nav-default.tm-nav
+                  each item in profileNav
+                    li(class= {"uk-active": item.id == profileActivePage})
+                      a(href= item.href)= item.title
+                        if item.amount
+                          |
+                          |
+                          span (#{item.amount})
+
+        //- Content column
+        div(class="uk-width-1-1 uk-width-expand@m")
+          div.uk-card.uk-card-default.uk-card-small.tm-ignore-container
+
+            header.uk-card-header
+              h1.uk-h2= page.title
+            block account

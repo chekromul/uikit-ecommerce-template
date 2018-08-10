@@ -1,0 +1,31 @@
+mixin article(article)
+
+  a(href= article.href)
+    article(class="uk-card " +
+                  "uk-card-default " +
+                  "uk-card-small " +
+                  "uk-article " +
+                  "uk-overflow-hidden " +
+                  "uk-box-shadow-hover-large " +
+                  "uk-height-1-1 " +
+                  "tm-ignore-container")
+
+      //- Preview
+      if article.preview
+        div.tm-ratio.tm-ratio-16-9
+          figure.tm-media-box.uk-cover-container.uk-margin-remove
+            img(src= article.preview
+                alt= article.title
+                uk-cover)
+
+      div.uk-card-body
+        div.uk-article-body
+          //- Date
+          div.uk-article-meta.uk-margin-xsmall-bottom
+            time= article.date
+          //- Title
+          div
+            h3.uk-margin-remove= article.title
+          //- Description
+          if article.description
+            div.uk-margin-small-top!= article.description

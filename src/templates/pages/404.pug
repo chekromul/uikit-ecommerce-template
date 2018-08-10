@@ -1,0 +1,17 @@
+extends /layouts/_default
+
+block vars
+  -
+    page = {
+      title: '404 — Page not found'
+    }
+
+block default
+  section.uk-section.uk-section-small
+    div.uk-container
+      div.uk-text-center
+        h1.uk-heading-hero 404
+        div.uk-text-lead Page not found
+        div.uk-margin-top Looks like the page you're trying to visit doesn't exist.
+          br
+          a(href="index.html") Go back to Homepage

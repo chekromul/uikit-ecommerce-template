@@ -1,0 +1,20 @@
+extends /layouts/_account
+
+block vars
+  -
+    page = {
+      title: 'Favorites'
+    }
+
+    profileActivePage = 2
+
+block account
+  div(class="uk-grid-collapse " +
+            "tm-products-list"
+      uk-grid)
+    each product in products
+      if product.isAddedToFavorites
+        +product(product)
+
+
+

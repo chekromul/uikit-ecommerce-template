@@ -1,0 +1,10 @@
+mixin quantity(productId)
+  a(onclick="increment(-1, 'product-" + productId + "')"
+    uk-icon="icon: minus; ratio: .75")
+  input(id="product-" + productId
+        class="uk-input tm-quantity-input"
+        type="text"
+        maxlength="3"
+        value="1")
+  a(onclick="increment(+1, 'product-" + productId + "')"
+    uk-icon="icon: plus; ratio: .75")

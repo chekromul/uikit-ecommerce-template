@@ -1,0 +1,86 @@
+mixin product(product)
+
+  article.tm-product-card
+
+    //- Media
+    div.tm-product-card-media
+      div.tm-ratio.tm-ratio-4-3
+        a.tm-media-box(href= product.href)
+
+          //- Labels
+          if product.statuses
+            div.tm-product-card-labels
+              each status in product.statuses
+                case status
+                  when "new"
+                    span.uk-label.uk-label-success= status
+                  when "top selling"
+                    span.uk-label.uk-label-warning= status
+                  when "trade-in"
+                    span.uk-label.uk-label-danger= status
+                  default
+                    span.uk-label= status
+
+          //- Image
+          figure.tm-media-box-wrap
+            if product.image
+              img(src= product.image.medium alt= product.name)
+            else
+              +icon("image", "3")(class="uk-text-muted")
+
+    //- Body
+    div.tm-product-card-body
+
+      //- Info
+      div.tm-product-card-info
+
+        //- Type
+        div.uk-text-meta.uk-margin-xsmall-bottom= product.type
+
+        //- Title
+        h3.tm-product-card-title
+          a.uk-link-heading(href= product.href)= product.name
+
+        //- Properties
+        if product.properties
+          ul.uk-list.uk-text-small.tm-product-card-properties
+            each value, property in product.properties
+              li
+                span.uk-text-muted!= property + ": "
+                span!= value
+
+      //- Shop
+      div.tm-product-card-shop
+
+        //- Prices
+        div.tm-product-card-prices
+          if product.isNotAvailable
+            div.uk-text-muted Product not available
+          else
+            if product.oldPrice
+              del.uk-text-meta= product.oldPrice
+            div.tm-product-card-price= product.price
+
+        //- Actions buttons
+        div.tm-product-card-add
+          div.uk-text-meta.tm-product-card-actions
+
+            //- Favorite
+            a.tm-product-card-action.js-add-to.js-add-to-favorites(
+              class= { "tm-action-button-active js-added-to": product.isAddedToFavorites }
+              title="Add to favorites")
+              +icon("heart", ".75")
+              span.tm-product-card-action-text Add to favorites
+
+            //- Compare
+            a.tm-product-card-action.js-add-to.js-add-to-compare(
+              class= { "tm-action-button-active js-added-to": product.isAddedToCompare }
+              title="Add to compare")
+              +icon("copy", ".75")
+              span.tm-product-card-action-text Add to compare
+
+          //- Add to cart
+          if !product.isNotAvailable
+            button.uk-button.uk-button-primary.tm-product-card-add-button.tm-shine.js-add-to-cart
+              +icon("cart")(class="tm-product-card-add-button-icon")
+              span.tm-product-card-add-button-text add to cart

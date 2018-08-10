@@ -1,0 +1,65 @@
+extends /layouts/_article
+
+block vars
+  -
+    article = articles[0]
+
+    page = {
+      title: article.title,
+      breadcrumbs: {
+        'Blog': 'blog.html'
+      }
+    }
+
+block article
+  div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+
+    //- Article
+    section
+      article(class="uk-card " +
+                    "uk-card-default " +
+                    "uk-card-body " +
+                    "uk-article " +
+                    "tm-ignore-container")
+        header.uk-text-center
+          //- Title
+          h1.uk-article-title= article.title
+          //- Date
+          div.uk-article-meta
+            time= article.date
+        section.uk-article-body
+          include /partials/_article
+
+    //- Related articles
+    section
+      h2.uk-text-center Related Articles
+      div(class="uk-grid-medium " +
+                "uk-grid-match " +
+                "uk-child-width-1-1 " +
+                "uk-child-width-1-2@s " +
+                "uk-child-width-1-4@m"
+          uk-grid)
+        each article in articles
+          div
+            a(href= article.href)
+              article(class="uk-card " +
+                            "uk-card-default " +
+                            "uk-card-small " +
+                            "uk-overflow-hidden " +
+                            "uk-link-heading " +
+                            "uk-display-block " +
+                            "uk-box-shadow-hover-large " +
+                            "uk-height-1-1 " +
+                            "tm-ignore-container")
+                //- Preview
+                if article.preview
+                  div.uk-card-media-top
+                    figure.uk-margin-remove.tm-ratio.tm-ratio-16-9
+                      div.uk-cover-container
+                        img(src= article.preview alt= article.title uk-cover)
+                div.uk-card-body
+                  //- Date
+                  div.uk-article-meta.uk-margin-xsmall-bottom
+                    time= article.date
+                  //- Title
+                  h3.uk-h4.uk-margin-remove= article.title

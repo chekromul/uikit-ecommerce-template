@@ -1,0 +1,83 @@
+extends /layouts/_informational
+
+block vars
+  -
+    page = {
+      title: 'Contacts',
+      breadcrumbs: {}
+    }
+
+    informationalActivePage = 2
+
+block informational
+  article(class="uk-card " +
+                "uk-card-default " +
+                "uk-card-small " +
+                "uk-card-body " +
+                "uk-article " +
+                "tm-ignore-container")
+
+    div.tm-wrapper
+      figure.tm-ratio.tm-ratio-16-9.js-map(
+        data-latitude="59.9356728"
+        data-longitude="30.3258604"
+        data-zoom="14")
+
+    div(class="uk-child-width-1-1 uk-child-width-1-2@s uk-margin-top"
+            uk-grid)
+
+      section
+        h3 Store
+        ul.uk-list
+          li
+            a.uk-link-heading(href="#")
+              +icon("receiver")(class="uk-margin-small-right")
+              span.tm-pseudo= shopInfo.phone
+          li
+            a.uk-link-heading(href="#")
+              +icon("mail")(class="uk-margin-small-right")
+              span.tm-pseudo= shopInfo.email
+          li
+            div
+              +icon("location")(class="uk-margin-small-right")
+              span!= shopInfo.address
+          li
+            div
+              +icon("clock")(class="uk-margin-small-right")
+              span= shopInfo.openingHours
+
+      section
+        h3 Feedback
+        dl.uk-description-list
+          dt Cooperation
+          dd: a.uk-link-muted(href="#") cooperation@example.com
+          dt Partners
+          dd: a.uk-link-muted(href="#") partners@example.com
+          dt Press
+          dd: a.uk-link-muted(href="#") press@example.com
+
+      section.uk-width-1-1
+        h2.uk-text-center Contact Us
+        form
+          div.uk-grid-small.uk-child-width-1-1(uk-grid)
+            div
+              label
+                div.uk-form-label.uk-form-label-required Name
+                input.uk-input(type="text" required)
+            div
+              label
+                div.uk-form-label.uk-form-label-required Email
+                input.uk-input(type="email" required)
+            div
+              label
+                div.uk-form-label Topic
+                select.uk-select
+                  option Customer service
+                  option Tech support
+                  option Other
+            div
+              label
+                div.uk-form-label Message
+                textarea.uk-textarea(rows="5")
+            div.uk-text-center
+              button.uk-button.uk-button-primary Send

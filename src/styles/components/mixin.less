@@ -1,0 +1,16 @@
+//
+// Component:       Mixin
+// Description:     Defines mixins which are used across all components
+//
+// ========================================================================
+
+
+// Horizontal and vertical center alignment
+// ========================================================================
+
+.center(@horizontal: true, @vertical: true) {
+  position: absolute;
+  & when ( @horizontal = true ) and ( @vertical = true ) {top: 50%;left: 50%;transform: translate(-50%, -50%);}
+  & when ( @horizontal = true ) and ( @vertical = false ) {left: 50%;transform: translate(-50%, 0);}
+  & when ( @horizontal = false ) and ( @vertical = true ) {top: 50%;transform: translate(0, -50%);}
+}

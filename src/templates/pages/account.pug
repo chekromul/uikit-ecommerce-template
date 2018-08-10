@@ -1,0 +1,42 @@
+extends /layouts/_account
+
+block vars
+  -
+    page = {
+      title: 'Orders'
+    }
+
+    profileActivePage = 1
+
+block account
+  each order in orders
+    section.uk-card-body
+      h3
+        a.uk-link-heading(href="#") ##{order.id}
+          |
+          |
+          span.uk-text-muted.uk-text-small from #{order.date}
+
+      table(class="uk-table " +
+                  "uk-table-small " +
+                  "uk-table-justify " +
+                  "uk-table-responsive " +
+                  "uk-table-divider " +
+                  "uk-margin-small-top " +
+                  "uk-margin-remove-bottom")
+        tbody
+          tr
+            th.uk-width-medium Items
+            td= order.items
+          tr
+            th.uk-width-medium Shipping
+            td= order.shipping
+          tr
+            th.uk-width-medium Payment
+            td= order.payment
+          tr
+            th.uk-width-medium Total
+            td= order.total
+          tr
+            th.uk-width-medium Status
+            td: span.uk-label(class= {"uk-label-danger": order.status == "Canceled"})= order.status

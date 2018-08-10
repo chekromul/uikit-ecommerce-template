@@ -1,0 +1,135 @@
+div.uk-navbar-container.tm-navbar-container(uk-sticky="cls-active: tm-navbar-container-fixed")
+  div.uk-container(uk-navbar)
+
+    div.uk-navbar-left
+
+      //- Hamburger
+      button(class="uk-navbar-toggle uk-hidden@m"
+             uk-toggle="target: #nav-offcanvas"
+             uk-navbar-toggle-icon)
+
+      //- Logo
+      a.uk-navbar-item.uk-logo(href="index.html")
+        img(src="images/logo.svg" width="90" height="32" alt="Logo")
+
+      //- Navigation
+      nav(class="uk-visible@m")
+        ul.uk-navbar-nav
+          each item in navbarMenu
+            li
+              a(href= item.href)= item.name
+                if item.items
+                  +icon('chevron-down', '.75')(class="uk-margin-xsmall-left")
+              if item.items
+                div(class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical"
+                    uk-drop="pos: bottom-justify;" +
+                            "delay-show: 125;" +
+                            "delay-hide: 50;" +
+                            "duration: 75;" +
+                            "boundary: .tm-navbar-container;" +
+                            "boundary-align: true;" +
+                            "pos: bottom-justify;" +
+                            "flip: x")
+
+                  if item.name === "Catalog"
+                    div.uk-container
+                      ul.uk-navbar-dropdown-grid.uk-child-width-1-5(uk-grid)
+                        each category in item.items
+                          li
+                            div.uk-margin-top.uk-margin-bottom
+                              a.uk-link-reset(href= category.href)
+                                if category.image
+                                  img(class="uk-display-block uk-margin-auto uk-margin-bottom"
+                                      src= category.image
+                                      alt= category.name
+                                      width="80"
+                                      height="80")
+                                div.uk-text-bolder= category.name
+                              if category.items
+                                ul.uk-nav.uk-nav-default
+                                  each subcategory in category.items
+                                    li
+                                      a(href="subcategory.html")= subcategory
+
+                  if item.name === "Brands"
+                    div.uk-container.uk-container-small.uk-margin-top.uk-margin-bottom
+                      ul.uk-grid-small.uk-child-width-1-6(uk-grid)
+                        each brand in item.items
+                          li
+                            div.tm-ratio.tm-ratio-4-3
+                              a(class="uk-link-muted " +
+                                      "uk-text-center " +
+                                      "uk-display-block " +
+                                      "uk-padding-small " +
+                                      "uk-box-shadow-hover-large " +
+                                      "tm-media-box"
+                                href="#"
+                                title= brand.name)
+                                figure.tm-media-box-wrap
+                                  img(src= brand.image alt= brand.name)
+                      div.uk-text-center.uk-margin
+                        +link-to-all('See all brands', item.href)
+
+                  if item.name === "Pages"
+                    div.uk-container.uk-container-small.uk-margin-top.uk-margin-bottom
+                      ul.uk-nav.uk-nav-default.uk-column-1-3
+                        each page in item.items
+                          li
+                            a(href= page.href)= page.name
+
+    div.uk-navbar-right
+
+      //- Search
+      a.uk-navbar-toggle.tm-navbar-button(href="#" uk-search-icon)
+      div.uk-navbar-dropdown.uk-padding-small.uk-margin-remove(
+        uk-drop="mode: click;" +
+                "cls-drop: uk-navbar-dropdown;" +
+                "boundary: .tm-navbar-container;" +
+                "boundary-align: true;" +
+                "pos: bottom-justify;" +
+                "flip: x")
+        div.uk-container
+          div.uk-grid-small.uk-flex-middle(uk-grid)
+            div.uk-width-expand
+              form.uk-search.uk-search-navbar.uk-width-1-1
+                input.uk-search-input(type="search" placeholder="Search…" autofocus)
+            div.uk-width-auto
+              a.uk-navbar-dropdown-close(href="#" uk-close)
+
+      //- Compare
+      a(class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button"
+        href="compare.html")
+        span(uk-icon="copy")
+        span.uk-badge 3
+
+      //- User
+      a.uk-navbar-item.uk-link-muted.tm-navbar-button(href="account.html" uk-icon="user")
+      div(class="uk-padding-small uk-margin-remove"
+          uk-dropdown="pos: bottom-right; offset: -10; delay-hide: 200;"
+          style="min-width: 150px;")
+        ul.uk-nav.uk-dropdown-nav
+          li
+            a(href="account.html") Orders
+              |
+              |
+              span (2)
+          li
+            a(href="favorites.html") Favorites
+              |
+              |
+              span (3)
+          li
+            a(href="personal.html") Personal
+          li
+            a(href="settings.html") Settings
+          li.uk-nav-divider
+          li
+            a(href="#") Log out
+
+      //- Cart
+      a.uk-navbar-item.uk-link-muted.tm-navbar-button(
+        href="cart.html"
+        uk-toggle="target: #cart-offcanvas"
+        onclick="return false")
+        span(uk-icon="cart")
+        span.uk-badge 2

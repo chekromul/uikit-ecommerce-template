@@ -1,0 +1,24 @@
+extends _default
+
+block vars
+
+block default
+  section.uk-section.uk-section-small
+    div.uk-container
+      div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+
+        section.uk-text-center
+
+          if page.breadcrumbs
+            ul.uk-breadcrumb.uk-flex-center.uk-margin-remove
+
+              li: a(href="index.html") Home
+
+              each href, breadcrumb in page.breadcrumbs
+                li: a(href= href)= breadcrumb
+
+              if page.title
+                li: span= page.title
+
+        section
+          block article

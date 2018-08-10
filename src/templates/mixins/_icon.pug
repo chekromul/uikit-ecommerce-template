@@ -1,0 +1,6 @@
+mixin icon(name, ratio)
+
+  if !ratio
+    span(uk-icon= name)&attributes(attributes)
+  else
+    span(uk-icon=`icon: ${name}; ratio: ${ratio};`)&attributes(attributes)

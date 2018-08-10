@@ -1,0 +1,22 @@
+extends /layouts/_pages
+
+block vars
+
+block pages
+  div.uk-grid-medium(uk-grid)
+
+    //- Content
+    section(class="uk-width-1-1 uk-width-expand@m")
+      block informational
+
+    //- Navigation
+    aside(class="uk-width-1-4 uk-visible@m tm-aside-column")
+      section(class="uk-card " +
+                    "uk-card-default " +
+                    "uk-card-small"
+              uk-sticky="offset: 90; bottom: true;")
+        nav
+          ul.uk-nav.uk-nav-default.tm-nav
+            each item in informationalNav
+              li(class= {"uk-active": item.id == informationalActivePage})
+                a(href= item.href)= item.title

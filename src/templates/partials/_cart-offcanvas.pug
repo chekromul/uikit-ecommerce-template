@@ -1,0 +1,64 @@
+div#cart-offcanvas(uk-offcanvas="overlay: true; flip: true")
+  aside.uk-offcanvas-bar.uk-padding-remove
+    div(class="uk-card " +
+              "uk-card-default " +
+              "uk-card-small " +
+              "uk-height-1-1 " +
+              "uk-flex " +
+              "uk-flex-column " +
+              "tm-shadow-remove")
+
+      header.uk-card-header.uk-flex.uk-flex-middle
+        div.uk-grid-small.uk-flex-1(uk-grid)
+          div.uk-width-expand
+            div.uk-h3 Cart
+          button.uk-offcanvas-close(type="button" uk-close)
+
+      div.uk-card-body.uk-overflow-auto
+        ul.uk-list.uk-list-divider
+          each product in products
+            if product.isAddedToCart
+              li.uk-visible-toggle
+                arttcle
+                  div.uk-grid-small(uk-grid)
+
+                    //- Image
+                    div.uk-width-1-4
+                      div.tm-ratio.tm-ratio-4-3
+                        a.tm-media-box(href= product.href)
+                          figure.tm-media-box-wrap
+                            if product.image
+                              img(src= product.image.small alt= product.name)
+                            else
+                              +icon("image", "3")(class="uk-text-muted")
+                    //- Info
+                    div.uk-width-expand
+                      div.uk-text-meta.uk-text-xsmall= product.type
+                      a.uk-link-heading.uk-text-small(href= product.href)= product.name
+                      div.uk-margin-xsmall.uk-grid-small.uk-flex-middle(uk-grid)
+                        div.uk-text-bolder.uk-text-small= product.price
+                        div.uk-text-meta.uk-text-xsmall 1 × #{product.price}
+
+                    //- Delete
+                    div
+                      a(class="uk-icon-link " +
+                              "uk-text-danger " +
+                              "uk-invisible-hover"
+                        href="#"
+                        uk-icon="icon: close; ratio: .75"
+                        uk-tooltip="Remove")
+
+      footer.uk-card-footer
+        div.uk-grid-small(uk-grid)
+          div.uk-width-expand.uk-text-muted.uk-h4 Subtotal
+          div.uk-h4.uk-text-bolder $3148.00
+        div(class="uk-grid-small " +
+                  "uk-child-width-1-1 " +
+                  "uk-child-width-1-2@m " +
+                  "uk-margin-small" uk-grid)
+          div
+            a(class="uk-button uk-button-default uk-margin-small uk-width-1-1"
+              href="cart.html") view cart
+          div
+            a(class="uk-button uk-button-primary uk-margin-small uk-width-1-1"
+              href="checkout.html") checkout

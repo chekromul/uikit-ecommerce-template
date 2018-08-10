@@ -1,0 +1,47 @@
+extends /layouts/_pages
+
+block vars
+  -
+    page = {
+      title: 'Catalog',
+      breadcrumbs: {},
+      quantity: 641
+    }
+
+block pages
+  div.uk-grid-medium(uk-grid)
+
+    //- Navigation
+    aside(class="uk-width-1-4 uk-visible@m tm-aside-column")
+      nav.uk-card.uk-card-default.uk-card-body.uk-card-small(uk-sticky="bottom: true; offset: 90")
+        ul.uk-nav.uk-nav-default(uk-scrollspy-nav="closest: li; scroll: true; offset: 90")
+          each category in catalog
+            li: a(href="#" + category.id)= category.name
+
+    //- Categories
+    div(class="uk-width-1-1 uk-width-expand@m")
+      div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+        each category in catalog
+          section(id= category.id)
+            div.uk-card.uk-card-default.uk-card-small.tm-ignore-container
+
+              //- Header
+              header.uk-card-header
+                div.uk-grid-small.uk-flex-middle(uk-grid)
+                  if category.image
+                    a(href= category.href)
+                      img(src= category.image
+                          alt= category.name
+                          width="50"
+                          height="50")
+                  div.uk-width-expand
+                    h2.uk-h4.uk-margin-remove
+                      a.uk-link-heading(href= category.href)= category.name
+                    div.uk-text-meta= category.quantity + " items"
+
+              //- Body
+              if category.items
+                div.uk-card-body
+                  ul.uk-list
+                    each subCategory in category.items
+                      li: a(href="subcategory.html")= subCategory

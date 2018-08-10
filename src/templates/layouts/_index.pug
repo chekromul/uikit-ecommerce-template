@@ -1,0 +1,26 @@
+include ../data/_data
+include ../mixins/_import
+
+doctype html
+
+//- Variables
+block vars
+  - var page
+
+//- Template
+html(lang="en")
+  head
+    include /partials/_head
+    link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500")
+    link(rel="stylesheet" href="styles/style.css")
+    script(src="scripts/uikit.js")
+    script(src="scripts/uikit-icons.js")
+
+  body
+    div.uk-offcanvas-content
+      block index
+
+    script(src="scripts/script.js")
+    script(src="//maps.googleapis.com/maps/api/js?key=AIzaSyClyjCemJi4m2q78gNeGkhlckpdH1hzTYA&callback=initMap"
+           async
+           defer)

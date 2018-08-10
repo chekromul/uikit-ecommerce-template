@@ -1,0 +1,322 @@
+extends /layouts/_checkout
+
+block vars
+  -
+    page = {
+      title: 'Checkout'
+    }
+
+block checkout
+  div.uk-grid-medium(uk-grid)
+
+    //- Form
+    form.uk-form-stacked.uk-width-1-1.tm-checkout(class="uk-width-expand@m")
+      div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+
+        //- Contact Information
+        section
+          h2.tm-checkout-title Contact Information
+          div.uk-card.uk-card-default.uk-card-small.uk-card-body.tm-ignore-container
+            div(class="uk-grid-small " +
+                      "uk-child-width-1-1 " +
+                      "uk-child-width-1-2@s"
+                uk-grid)
+
+              div
+                label
+                  div.uk-form-label.uk-form-label-required First Name
+                  input.uk-input(type="text" required)
+
+              div
+                label
+                  div.uk-form-label.uk-form-label-required Last Name
+                  input.uk-input(type="text" required)
+
+              div
+                label
+                  div.uk-form-label.uk-form-label-required Phone Number
+                  input.uk-input(type="tel" required)
+
+              div
+                label
+                  div.uk-form-label.uk-form-label-required Email
+                  input.uk-input(type="email" required)
+
+        //- Shipping
+        section
+          h2.tm-checkout-title Shipping
+          div.uk-card.uk-card-default.uk-card-small.uk-card-body.tm-ignore-container
+            div(class="uk-grid-small " +
+                      "uk-grid-match " +
+                      "uk-child-width-1-1 " +
+                      "uk-child-width-1-3@s " +
+                      "uk-flex-center"
+                uk-switcher="toggle: > * > .tm-choose"
+                uk-grid)
+
+              div
+                a.tm-choose(href="#")
+                  div.tm-choose-title pick up from store
+                  div.tm-choose-description Free, tomorrow
+
+              div
+                a.tm-choose(href="#")
+                  div.tm-choose-title delivery in city
+                  div.tm-choose-description Free, tomorrow
+
+              div
+                a.tm-choose(href="#")
+                  div.tm-choose-title regional delivery
+                  div.tm-choose-description
+                    | Via Russian Post or postal courier services. Sending to any country
+
+            div.uk-switcher.uk-margin
+
+              //- Pick up
+              section
+                div(class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@s"
+                    uk-grid)
+
+                  div
+                    figure.uk-card-media-top.tm-ratio.tm-ratio-16-9.js-map(
+                      data-latitude="59.9356728"
+                      data-longitude="30.3258604"
+                      data-zoom="14")
+
+                  div.uk-text-small
+                    div.uk-text-bolder Store Name
+                    div!= shopInfo.address
+                    div= shopInfo.openingHours
+
+              //- Shipping in St Petersburg
+              section
+
+                div.uk-grid-small(uk-grid)
+
+                  div.uk-width-expand
+                    label
+                      div.uk-form-label.uk-form-label-required Street
+                      input.uk-input(type="text")
+
+                  div(class="uk-width-1-3 uk-width-1-6@s")
+                    label
+                      div.uk-form-label.uk-form-label-required House
+                      input.uk-input(type="text")
+
+                div.uk-grid-small(class="uk-child-width-1-3 uk-child-width-1-4@s" uk-grid)
+
+                  div
+                    label
+                      div.uk-form-label Building
+                      input.uk-input(type="text")
+
+                  div
+                    label
+                      div.uk-form-label Entrance
+                      input.uk-input(type="text")
+
+                  div
+                    label
+                      div.uk-form-label Floor
+                      input.uk-input(type="text")
+
+                  div
+                    label
+                      div.uk-form-label Apartment
+                      input.uk-input(type="text")
+
+                  div.uk-width-1-1
+                    label
+                      div.uk-form-label Comment
+                      textarea.uk-textarea(
+                        rows="5"
+                        placeholder="Additional information: phone numbers or doorphone code")
+
+                div.uk-grid-small(class="uk-child-width-1-2 uk-child-width-1-4@s" uk-grid)
+
+                  div.uk-width-1-1.uk-text-meta Choose a convenient date and delivery interval
+
+                  div
+                    select.uk-select
+                      option Tomorrow
+                      option 25 May
+                      option 26 May
+                      option 27 May
+                      option 28 May
+                      option 29 May
+                      option 30 May
+                      option 1 June
+
+                  div
+                    select.uk-select
+                      option 09:00 – 12:00
+                      option 12:00 – 15:00
+                      option 15:00 – 18:00
+                      option 18:00 – 21:00
+                      option 21:00 – 23:00
+
+
+              //- Regional shipping
+              div
+
+                div.uk-grid-small(uk-grid)
+
+                  div.uk-width-1-1
+                    label
+                      div.uk-form-label.uk-form-label-required Country
+                      select.uk-select
+                        option Choose the country
+                        option(value="RU") Russia
+
+                div.uk-grid-small(uk-grid)
+
+                  div.uk-width-expand
+                    label
+                      div.uk-form-label.uk-form-label-required City
+                      input.uk-input(type="text")
+
+                  div(class="uk-width-1-3 uk-width-1-6@s")
+                    label
+                      div.uk-form-label.uk-form-label-required Post Code
+                      input.uk-input(type="text")
+
+                div.uk-grid-small(uk-grid)
+
+                  div.uk-width-expand
+                    label
+                      div.uk-form-label.uk-form-label-required Street
+                      input.uk-input(type="text")
+
+                  div(class="uk-width-1-3 uk-width-1-6@s")
+                    label
+                      div.uk-form-label.uk-form-label-required House
+                      input.uk-input(type="text")
+
+                div.uk-grid-small(class="uk-child-width-1-3 uk-child-width-1-4@s" uk-grid)
+
+                  div
+                    label
+                      div.uk-form-label Building
+                      input.uk-input(type="text")
+
+                  div
+                    label
+                      div.uk-form-label Entrance
+                      input.uk-input(type="text")
+
+                  div
+                    label
+                      div.uk-form-label Floor
+                      input.uk-input(type="text")
+
+                  div
+                    label
+                      div.uk-form-label Apartment
+                      input.uk-input(type="text")
+
+                  div.uk-width-1-1
+                    label
+                      div.uk-form-label Comment
+                      textarea.uk-textarea(
+                        rows="5"
+                        placeholder="Additional information: phone numbers or doorphone code")
+
+        //- Payment
+        section
+          h2.tm-checkout-title Payment
+          div.uk-card.uk-card-default.uk-card-small.tm-ignore-container
+            div.uk-card-body
+              div(class="uk-grid-small " +
+                        "uk-grid-match " +
+                        "uk-child-width-1-1 " +
+                        "uk-child-width-1-3@s " +
+                        "uk-flex-center"
+                  uk-switcher="toggle: > * > .tm-choose"
+                  uk-grid)
+
+                div
+                  a.tm-choose(href="#")
+                    div.tm-choose-title payment upon receipt
+                    div.tm-choose-description Cash, credit card
+
+                div
+                  a.tm-choose(href="#")
+                    div.tm-choose-title online by card
+                    div.tm-choose-description Visa, MasterCard
+
+                div
+                  a.tm-choose(href="#")
+                    div.tm-choose-title electronic payment
+                    div.tm-choose-description PayPal, Yandex.Money, QIWI
+
+            div.uk-card-footer
+              div.uk-grid-small.uk-flex-middle.uk-flex-center.uk-text-center(uk-grid)
+
+                div.uk-text-meta
+                  +icon("lock", ".75")(class="uk-margin-xsmall-right")
+                  | Security of payments is is provided by secure protocols
+
+                div
+                  img(src="images/verified-by-visa.svg"
+                      title="Verified by Visa"
+                      style="height: 25px;")
+
+                div
+                  img(src="images/mastercard-securecode.svg"
+                      title="MasterCard SecureCode"
+                      style="height: 25px;")
+
+    //- Checkout
+    div(class="uk-width-1-1 uk-width-1-4@m tm-aside-column")
+      div.uk-card.uk-card-default.uk-card-small.tm-ignore-container(
+        uk-sticky="offset: 30; bottom: true;")
+
+        section.uk-card-body
+          h4 Items in order
+          each product in products
+            if product.isAddedToCart
+              div.uk-grid-small(uk-grid)
+                div.uk-width-expand
+                  div.uk-text-small= product.name
+                  div.uk-text-meta 1 × #{product.price}
+                div.uk-text-right
+                  div= product.price
+
+        section.uk-card-body
+
+          div.uk-grid-small(uk-grid)
+            div.uk-width-expand
+              div.uk-text-muted Shipping
+            div.uk-text-right
+              div Pick up from store
+              div.uk-text-meta Free, tomorrow
+
+          div.uk-grid-small(uk-grid)
+            div.uk-width-expand
+              div.uk-text-muted Payment
+            div.uk-text-right
+              div Online by card
+
+        section.uk-card-body
+
+          div.uk-grid-small(uk-grid)
+            div.uk-width-expand
+              div.uk-text-muted Subtotal
+            div.uk-text-right
+              div $3148
+
+          div.uk-grid-small(uk-grid)
+            div.uk-width-expand
+              div.uk-text-muted Discount
+            div.uk-text-right
+              div.uk-text-danger −$29
+
+        section.uk-card-body
+
+          div.uk-grid-small.uk-flex-middle(uk-grid)
+            div.uk-width-expand
+              div.uk-text-muted Total
+            div.uk-text-right
+              div.uk-text-lead.uk-text-bolder $3119
+
+          button.uk-button.uk-button-primary.uk-margin-small.uk-width-1-1 checkout

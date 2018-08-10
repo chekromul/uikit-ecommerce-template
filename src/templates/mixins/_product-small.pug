@@ -1,0 +1,35 @@
+mixin product-small(product)
+
+  div.uk-grid-small.uk-height-1-1(uk-grid)
+
+    //- Image
+    div.uk-width-1-3
+      div.tm-ratio.tm-ratio-4-3
+        a.tm-media-box(href= product.href)
+          figure.tm-media-box-wrap
+            if product.image
+              img(src= product.image.small alt= product.name)
+            else
+              +icon("image", "3")(class="uk-text-muted")
+
+    //- Info
+    div.uk-width-expand
+      div.tm-product-card-body.uk-padding-remove.uk-height-1-1
+
+        div.tm-product-card-info
+          div.uk-text-meta.uk-margin-xsmall-bottom= product.type
+          a.tm-product-card-title(href= product.href)= product.name
+
+        div.tm-product-card-shop
+          div.tm-product-card-prices
+            if product.isNotAvailable
+              div.uk-text-muted Product not available
+            else
+              if product.oldPrice
+                del.uk-text-meta= product.oldPrice
+              div.tm-product-card-price= product.price
+          div.tm-product-card-add
+            if !product.isNotAvailable
+              button.uk-button.uk-button-primary.tm-product-card-add-button.tm-shine.js-add-to-cart
+                +icon("cart")(class="tm-product-add-button-icon")
+                span.tm-product-card-add-button-text add to cart

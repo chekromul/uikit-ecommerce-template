@@ -1,0 +1,44 @@
+extends /layouts/_pages
+
+block vars
+  -
+    page = {
+      title: 'Compare',
+      breadcrumbs: {}
+    }
+
+block pages
+  div.uk-card.uk-card-default.uk-overflow-auto.tm-ignore-container
+    table.uk-table.uk-table-divider.tm-compare-table
+
+      thead
+        tr.uk-child-width-1-4
+
+          td.uk-table-middle.uk-text-center.tm-compare-column
+            input.tm-checkbox(id="show-difference" type="checkbox")
+            label(for="show-difference") Show differences only
+
+          each product in products
+            if product.isAddedToCompare
+              td.tm-compare-table-column
+                div.uk-height-1-1
+                  div.uk-grid-small.uk-child-width-1-1.uk-height-1-1(uk-grid)
+
+                    div.uk-text-center
+                      a.uk-text-small.uk-text-danger(href="#")
+                        +icon("close", ".75")
+                        span.uk-margin-xsmall-left.tm-pseudo Delete
+
+                    div
+                      +product-small(product)
+
+      each group in compare
+        tbody
+          tr
+            th(colspan="4")
+              h3.uk-margin-remove= group.name
+          each values, property in group.properties
+            tr
+              th= property
+              each value in values
+                td!= value

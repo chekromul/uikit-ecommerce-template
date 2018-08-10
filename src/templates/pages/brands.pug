@@ -1,0 +1,82 @@
+extends /layouts/_pages
+
+block vars
+  -
+    page = {
+      title: 'Brands',
+      breadcrumbs: {}
+    }
+
+block pages
+  div.uk-card.uk-card-default.tm-ignore-container
+
+    header.uk-card-header.uk-background-default
+      nav
+        ul.uk-subnav.uk-flex-center.uk-margin-remove
+          li: a(href="#number") #
+          li: a(href="#A") A
+          li: a(href="#B") B
+          li: a(href="#C") C
+          li: a(href="#D") D
+          li: a(href="#E") E
+          li: a(href="#F") F
+          li: a(href="#G") G
+          li: a(href="#H") H
+          li: a(href="#I") I
+          li: a(href="#J") J
+          li: a(href="#K") K
+          li: a(href="#L") L
+          li: a(href="#M") M
+          li: a(href="#N") N
+          li: a(href="#O") O
+          li: a(href="#P") P
+          li: a(href="#Q") Q
+          li: a(href="#R") R
+          li: a(href="#S") S
+          li: a(href="#T") T
+          li: a(href="#U") U
+          li: a(href="#V") V
+          li: a(href="#W") W
+          li: a(href="#X") X
+          li: a(href="#Y") Y
+          li: a(href="#Z") Z
+
+    section.uk-card-body(id="A")
+      div(uk-grid)
+
+        div(class="uk-width-1-1 uk-width-1-6@m")
+          h2.uk-text-center A
+
+        div(class="uk-width-1-1 uk-width-expand@m")
+          ul(class="uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-5@m"
+             uk-grid)
+            each brand in brands
+              li
+                a(class="uk-link-muted " +
+                        "uk-text-center " +
+                        "uk-display-block " +
+                        "uk-padding-small " +
+                        "uk-box-shadow-hover-large"
+                  href="#")
+                  if brand.image
+                    div.tm-ratio.tm-ratio-4-3
+                      div.tm-media-box
+                        figure.tm-media-box-wrap
+                          img.item-brand(src= brand.image alt= brand.name)
+                    div.uk-margin-small-top.uk-text-truncate= brand.name
+
+    section.uk-card-body(id="B")
+      div(uk-grid)
+
+        div(class="uk-width-1-1 uk-width-1-6@m")
+          h2.uk-text-center B
+
+        div(class="uk-width-1-1 uk-width-expand@m")
+
+    section.uk-card-body(id="C")
+      div(uk-grid)
+
+        div(class="uk-width-1-1 uk-width-1-6@m")
+          h2.uk-text-center C
+
+        div(class="uk-width-1-1 uk-width-expand@m")

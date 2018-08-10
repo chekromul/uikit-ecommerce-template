@@ -1,0 +1,385 @@
+extends /layouts/_pages
+
+block vars
+  -
+    product = products[0];
+
+    page = {
+      title: product.name,
+      breadcrumbs: {
+        'Catalog': 'catalog.html',
+        'Laptops & Tablets': 'category.html',
+        'Laptops': 'subcategory.html'
+      }
+    }
+
+block pages
+  div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+
+    //- Product
+    div
+      div.uk-card.uk-card-default.uk-card-small.tm-ignore-container
+        div.uk-grid-small.uk-grid-collapse.uk-grid-match(uk-grid)
+
+          //- Media
+          div(class="uk-width-1-1 uk-width-expand@m")
+            div.uk-grid-collapse.uk-child-width-1-1(
+              uk-slideshow="finite: true; ratio: 4:3;"
+              uk-grid)
+
+              //- Primary image
+              div
+                ul.uk-slideshow-items(uk-lightbox)
+                  li
+                    if product.image
+                      a.uk-card-body.tm-media-box.tm-media-box-zoom(href= product.image.large)
+                        figure.tm-media-box-wrap
+                          img(src= product.image.large alt= product.name)
+                    else
+                      figure.tm-media-box-wrap
+                        +icon("image", "5")(class="uk-text-muted")
+                  if product.additionalImages
+                    each additionalImage in product.additionalImages
+                      li
+                        a.uk-card-body.tm-media-box.tm-media-box-zoom(href= additionalImage.large)
+                          figure.tm-media-box-wrap
+                            img(src= additionalImage.large alt= product.name)
+
+              //- Additional images
+              if product.additionalImages
+                div
+                  div.uk-card-body.uk-flex.uk-flex-center
+                    div(class="uk-width-1-2 uk-visible@s")
+                      div(uk-slider="finite: true")
+                        div.uk-position-relative
+                          div.uk-slider-container
+                            ul.tm-slider-items.uk-slider-items.uk-child-width-1-4.uk-grid.uk-grid-small
+                              li(uk-slideshow-item="0")
+                                div.tm-ratio.tm-ratio-1-1
+                                  a.tm-media-box.tm-media-box-frame
+                                    figure.tm-media-box-wrap
+                                      img(src= product.image.small alt= product.name)
+
+                              each additionalImage, index in product.additionalImages
+                                li(uk-slideshow-item= index + 1)
+                                  div.tm-ratio.tm-ratio-1-1
+                                    a.tm-media-box.tm-media-box-frame(href="#")
+                                      figure.tm-media-box-wrap
+                                        img(src= additionalImage.small alt= product.name)
+
+                            div
+                              a.uk-position-center-left-out.uk-position-small(
+                                href="#"
+                                uk-slider-item="previous"
+                                uk-slidenav-previous)
+                              a.uk-position-center-right-out.uk-position-small(
+                                href="#"
+                                uk-slider-item="next"
+                                uk-slidenav-next)
+
+                    ul(class="uk-slideshow-nav uk-dotnav uk-hidden@s")
+
+          //- Info
+          div(class="uk-width-1-1 uk-width-1-3@m tm-product-info")
+            div.uk-card-body
+
+              //- Brand
+              div
+                a(href= product.brand.href title= product.brand.name)
+                  img(src= product.brand.image alt= product.brand.name style="height: 40px;")
+
+              //- Rating & Statuses
+              div.uk-margin
+                div.uk-grid-small(uk-grid)
+
+                  //- Rating
+                  div.uk-flex.uk-flex-middle
+                    ul.uk-iconnav.uk-margin-xsmall-bottom.tm-rating
+                      li: +icon("star")(class="uk-text-warning")
+                      li: +icon("star")(class="uk-text-warning")
+                      li: +icon("star")(class="uk-text-warning")
+                      li: +icon("star")(class="uk-text-warning")
+                      li: +icon("star")(class="uk-text-warning")
+                    div.uk-margin-xsmall-left
+                      a.uk-text-meta.js-scroll-to-description(
+                        href="#description"
+                        onclick="UIkit.switcher('.js-product-switcher').show(3);") (2)
+
+                  //- Statuses
+                  if product.statuses
+                    div
+                      each status in product.statuses
+                        case status
+                          when "new"
+                            span.uk-label.uk-label-success.uk-margin-xsmall-right= status
+                          when "top selling"
+                            span.uk-label.uk-label-warning.uk-margin-xsmall-right= status
+                          when "trade-in"
+                            span.uk-label.uk-label-danger.uk-margin-xsmall-right= status
+                          default
+                            span.uk-label= status
+
+              //- Variations
+              if product.statuses
+                div.uk-margin
+                  div.uk-grid-medium(uk-grid)
+                    each variation in product.variations
+                      div
+                        div.uk-text-small.uk-margin-xsmall-bottom= variation.name
+                        ul.uk-subnav.uk-subnav-pill.tm-variations(uk-switcher)
+                          each value in variation.values
+                            li
+                              if variation.name === "Color"
+                                a.tm-variation-color(uk-tooltip= value.name)
+                                  div(style="background-color: " + value.value)
+                              else
+                                a= value.name
+
+              //- Shop
+              div.uk-margin
+                div.uk-padding-small.uk-background-primary-lighten.uk-border-rounded
+                  div.uk-grid-small.uk-child-width-1-1(uk-grid)
+
+                    //- Prices
+                    div
+                      if product.isNotAvailable
+                        div.uk-text-muted Product not available
+                      else
+                        if product.oldPrice
+                          del.uk-text-meta= product.oldPrice
+                          div.tm-product-price= product.price
+
+                    //- Add to cart
+                    if !product.isNotAvailable
+                      div
+                        div.uk-grid-small(uk-grid)
+
+                          //- Quantity
+                          div
+                            +quantity(product.id)
+
+                          //- Add to cart button
+                          div
+                            button(class="uk-button " +
+                                         "uk-button-primary " +
+                                         "tm-product-add-button " +
+                                         "tm-shine " +
+                                         "js-add-to-cart") add to cart
+
+                          //- Actions buttons
+                          div(class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta")
+                            a.uk-margin-small-right.js-add-to.js-add-to-favorites(
+                              class= { "tm-action-button-active js-added-to": product.isAddedToFavorites }
+                              uk-tooltip="Add to favorites")
+                              +icon("heart")
+                            a.js-add-to.js-add-to-compare(
+                              class= { "tm-action-button-active js-added-to": product.isAddedToCompare }
+                              uk-tooltip="Add to compare")
+                              +icon("copy")
+
+              //- Delivery info
+              div.uk-margin
+                div.uk-padding-small.uk-background-muted.uk-border-rounded
+                  div.uk-grid-small.uk-child-width-1-1.uk-text-small(uk-grid)
+
+                    //- Delivery
+                    div
+                      div.uk-grid-collapse(uk-grid)
+                        +icon("cart")(class="uk-margin-xsmall-right")
+                        div
+                          div.uk-text-bolder Delivery
+                          div.uk-text-xsmall.uk-text-muted In stock, free, tomorrow
+
+                    //- Pick up
+                    div
+                      div.uk-grid-collapse(uk-grid)
+                        +icon("location")(class="uk-margin-xsmall-right")
+                        div
+                          div.uk-text-bolder Pick up from store
+                          div.uk-text-xsmall.uk-text-muted In stock, free, tomorrow
+
+              //- Properties
+              div.uk-margin
+                if product.properties
+                  ul.uk-list.uk-text-small.uk-margin-remove
+                    for value, property in product.properties
+                      li
+                        span.uk-text-muted= property + ": "
+                        span!= value
+                  div.uk-margin-small-top
+                    a.uk-link-heading.js-scroll-to-description(
+                      href="#description"
+                      onclick="UIkit.switcher('.js-product-switcher').show(1);")
+                      span.tm-pseudo Detailed specifications
+                      +icon("chevron-down", ".75")(class="uk-margin-xsmall-left")
+
+          //- Description
+          div#description.uk-width-1-1.tm-product-description
+
+            header
+              nav.tm-product-nav(
+                uk-sticky="offset: 60; " +
+                          "bottom: #description; " +
+                          "cls-active: tm-product-nav-fixed;")
+                ul.uk-subnav.uk-subnav-pill.js-product-switcher(
+                  uk-switcher="connect: .js-tabs")
+                  li: a.js-scroll-to-description(href="#description") Overview
+                  li: a.js-scroll-to-description(href="#description") Specifications
+                  li: a.js-scroll-to-description(href="#description") Accessories
+                    |
+                    |
+                    span (9)
+                  li: a.js-scroll-to-description(href="#description") Reviews
+                    |
+                    |
+                    span (2)
+                  li: a.js-scroll-to-description(href="#description") Q&A
+
+            div.uk-card-body
+              div.uk-switcher.js-product-switcher.js-tabs
+
+                //- Overview
+                section
+                  article.uk-article
+                    div.uk-article-body
+                      include /partials/_article
+
+                //- Specifications
+                section
+                  each group in product.specifications
+                    h2= group.name
+                    table.uk-table.uk-table-divider.uk-table-justify.uk-table-responsive
+                      each value, property in group.properties
+                        tr
+                          th.uk-width-medium= property
+                          td.uk-table-expand!= value
+
+                //- Accessories
+                section
+                  div.tm-wrapper
+                    div(class="uk-grid-collapse " +
+                              "uk-child-width-1-4 " +
+                              "tm-products-grid"
+                        uk-grid)
+                      each product in products
+                        +product(product)
+
+                //- Reviews
+                section
+                  if product.reviews
+                    div.uk-grid-small.uk-grid-divider(uk-grid)
+
+                      div(class="uk-width-1-1 " +
+                                    "uk-width-1-5@s " +
+                                    "uk-text-center " +
+                                    "tm-reviews-column")
+                        div.uk-text-meta.uk-text-uppercase average rating
+                        div.uk-heading-primary 5.0
+                        div.uk-flex.uk-flex-center
+                          ul.uk-iconnav.tm-rating
+                            li: +icon("star")(class="uk-text-warning")
+                            li: +icon("star")(class="uk-text-warning")
+                            li: +icon("star")(class="uk-text-warning")
+                            li: +icon("star")(class="uk-text-warning")
+                            li: +icon("star")(class="uk-text-warning")
+                        div.uk-margin-small-top.uk-text-meta based on 2 reviews
+                        button(class="uk-button uk-button-primary uk-margin-top uk-width-1-1"
+                               uk-toggle="target: #review") write a review
+
+                      div(class="uk-width-1-1 " +
+                                    "uk-width-expand@s")
+                        div.uk-grid-small.uk-grid-divider.uk-child-width-1-1(uk-grid)
+                          each review in product.reviews
+                            article
+                              section.uk-grid-small.uk-child-width-1-1(uk-grid)
+
+                                header
+                                  div.uk-h4.uk-margin-remove= review.author
+                                  time.uk-text-meta= review.date
+
+                                div
+                                  ul.uk-iconnav.uk-margin-bottom.tm-rating
+                                    li: +icon("star")(class="uk-text-warning")
+                                    li: +icon("star")(class="uk-text-warning")
+                                    li: +icon("star")(class="uk-text-warning")
+                                    li: +icon("star")(class="uk-text-warning")
+                                    li: +icon("star")(class="uk-text-warning")
+
+                                  div!= review.text
+
+                                  div.uk-grid-small.uk-flex-middle.uk-margin-top(uk-grid)
+                                    div.uk-text-meta Was this review helpful to you?
+                                    div
+                                      button.uk-button.uk-button-default.uk-button-small
+                                        | Yes
+                                        span.uk-margin-xsmall-left.uk-text-muted= review.likes
+                                      button.uk-button.uk-button-default.uk-button-small.uk-margin-small-left
+                                        | No
+                                        span.uk-margin-xsmall-left.uk-text-muted= review.dislikes
+
+                //- Q&A
+                section
+                  ul.uk-list-divider.uk-list-large(uk-accordion="multiple: true")
+                    each question in product.questions
+                      li
+                        a.uk-accordion-title(href="#")= question.question
+                        div.uk-accordion-content= question.answer
+
+    // Related items
+    section
+      div(uk-slider="finite: true")
+
+        div.uk-grid-small.uk-flex-middle.uk-margin-bottom(uk-grid)
+          h2.uk-width-expand(class="uk-text-center uk-text-left@s") Related Products
+          div(class="uk-visible@s")
+            a.tm-slidenav(href="#" uk-slider-item="previous" uk-slidenav-previous)
+            a.tm-slidenav(href="#" uk-slider-item="next" uk-slidenav-next)
+
+        div
+          div.uk-card.uk-card-default.uk-card-small.tm-ignore-container
+            div.uk-position-relative
+              div.uk-slider-container
+                div(class="uk-slider-items " +
+                          "uk-grid-collapse " +
+                          "uk-child-width-1-3 " +
+                          "uk-child-width-1-4@m " +
+                          "tm-products-grid")
+                  each product in products
+                    +product(product)
+
+          ul.uk-slider-nav.uk-dotnav.uk-flex-center.uk-margin-top(class="uk-hidden@s")
+
+  //- Modals
+  div#review(uk-modal)
+    div.uk-modal-dialog.uk-modal-body
+      button.uk-modal-close-outside(type="button" uk-close)
+      h2.uk-modal-title.uk-text-center Review
+      form.uk-form-stacked
+        div.uk-grid-small.uk-child-width-1-1(uk-grid)
+
+          div
+            label
+              div.uk-form-label.uk-form-label-required Name
+              input.uk-input(type="text" required)
+
+          div
+            label
+              div.uk-form-label.uk-form-label-required Email
+              input.uk-input(type="email" required)
+
+          div
+            div.uk-form-label Rating
+            ul.uk-iconnav.tm-rating
+              li: a(uk-icon="star")
+              li: a(uk-icon="star")
+              li: a(uk-icon="star")
+              li: a(uk-icon="star")
+              li: a(uk-icon="star")
+
+          div
+            label
+              div.uk-form-label.uk-form-label-required Review
+              textarea.uk-textarea(rows="5" required)
+
+          div.uk-text-center
+            button.uk-button.uk-button-primary Send

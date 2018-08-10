@@ -1,0 +1,84 @@
+extends /layouts/_account
+
+block vars
+  -
+    page = {
+      title: 'Settings'
+    }
+
+    profileActivePage = 4
+
+block account
+  div.uk-card-body
+    form.uk-form-stacked
+      div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+
+        //- Email
+        fieldset.uk-fieldset
+          legend.uk-h4 Email
+          div(class="uk-grid-small " +
+                    "uk-child-width-1-1"
+              uk-grid)
+            div
+              label
+                div.uk-form-label Current Email
+                input.uk-input.uk-form-width-large(type="email" value= profile.email disabled)
+            div
+              label
+                div.uk-form-label New Email
+                input.uk-input.uk-form-width-large(type="email")
+            div
+              button.uk-button.uk-button-primary update email
+
+        //- Password
+        fieldset.uk-fieldset
+          legend.uk-h4 Password
+          div(class="uk-grid-small " +
+                    "uk-child-width-1-1"
+              uk-grid)
+            div
+              label
+                div.uk-form-label Current Password
+                input.uk-input.uk-form-width-large(type="password")
+            div
+              label
+                div.uk-form-label New Password
+                input.uk-input.uk-form-width-large(type="password")
+            div
+              label
+                div.uk-form-label Confirm Password
+                input.uk-input.uk-form-width-large(type="password")
+            div
+              button.uk-button.uk-button-primary update password
+
+        //- Email notifications
+        fieldset.uk-fieldset
+          legend.uk-h4 Email Notifications
+          ul.uk-list.uk-margin-remove
+            li
+              input(class="tm-checkbox"
+                    id="notification-1"
+                    type="checkbox"
+                    name="notification"
+                    value="1"
+                    checked)
+              label(for="notification-1")
+                span Weekly Newsletter
+            li
+              input(class="tm-checkbox"
+                    id="notification-2"
+                    type="checkbox"
+                    name="notification"
+                    value="1"
+                    checked)
+              label(for="notification-2")
+                span New Product Announcements
+            li
+              input(class="tm-checkbox"
+                    id="notification-3"
+                    type="checkbox"
+                    name="notification"
+                    value="1"
+                    checked)
+              label(for="notification-3")
+                span Product Specials

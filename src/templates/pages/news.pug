@@ -1,0 +1,28 @@
+extends /layouts/_informational
+
+block vars
+  -
+    page = {
+      title: 'News',
+      breadcrumbs: {}
+    }
+
+    informationalActivePage = 4
+
+block informational
+  section.uk-card.uk-card-default.uk-card-small.uk-card-body.tm-ignore-container
+    ul.uk-list.uk-list-large.uk-list-divider
+      each article in news
+        li
+          article.uk-article
+            div.uk-article-body
+              //- Date
+              div.uk-article-meta.uk-margin-xsmall-bottom
+                time= article.date
+              //- Title
+              div
+                h3
+                  a.uk-link-heading(href= article.href)= article.title
+              //- Description
+              if article.description
+                div.uk-margin-small-top!= article.description

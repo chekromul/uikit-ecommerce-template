@@ -1,0 +1,37 @@
+extends _index
+
+block vars
+
+block index
+
+  header
+    include ../partials/_header
+
+  main
+
+    block default
+
+    //- Advantages
+    section.uk-section.uk-section-default.uk-section-small
+      div.uk-container
+        div(uk-slider)
+          ul(class="uk-slider-items " +
+                   "uk-child-width-1-1 " +
+                   "uk-child-width-1-2@s " +
+                   "uk-child-width-1-5@m " +
+                   "uk-grid")
+            each advantage in advantages
+              li
+                div(class="uk-grid-small uk-flex-center uk-flex-left@s" uk-grid)
+                  div
+                    +icon(advantage.icon, "2.5")
+                  div(class="uk-text-center uk-text-left@s uk-width-expand@s")
+                    div= advantage.title
+                    div.uk-text-meta= advantage.description
+          ul.uk-slider-nav.uk-dotnav.uk-flex-center.uk-margin-medium-top
+
+  footer
+    include /partials/_footer
+
+  include ../partials/_nav-offcanvas
+  include ../partials/_cart-offcanvas

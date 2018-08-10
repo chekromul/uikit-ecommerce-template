@@ -1,0 +1,48 @@
+extends _index
+
+block vars
+
+block index
+
+  header
+    div.uk-navbar-container.tm-navbar-container
+      div.uk-container(uk-navbar)
+
+        div.uk-navbar-left
+          //- Logo
+          a.uk-navbar-item.uk-logo(href="index.html")
+            img(src="images/logo.svg" width="90" height="32" alt="Logo")
+
+        div.uk-navbar-right
+          //- Phone
+          a.uk-navbar-item.uk-link-muted(href="#")
+            +icon("receiver", ".75")(class="uk-margin-xsmall-right")
+            span.tm-pseudo= shopInfo.phone
+
+
+  main
+    section.uk-section.uk-section-small
+      div.uk-container
+        div.uk-grid-medium.uk-child-width-1-1(uk-grid)
+
+          section.uk-text-center
+            a.uk-link-muted.uk-text-small(href="cart.html")
+              +icon("arrow-left", ".75")(class="uk-margin-xsmall-right")
+              | Return to cart
+            h1.uk-margin-small-top.uk-margin-remove-bottom Checkout
+
+          section
+            block checkout
+
+  footer
+    div.uk-section.uk-section-secondary.uk-section-small.uk-light
+      div.uk-container
+        div.uk-flex-middle(uk-grid)
+
+          div.uk-width-expand
+            div © Company Name. All rights reserved
+
+          div
+            a.uk-link-muted(href="#")
+              +icon("receiver", ".75")(class="uk-margin-xsmall-right")
+              span.tm-pseudo= shopInfo.phone
