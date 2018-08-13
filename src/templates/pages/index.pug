@@ -60,7 +60,7 @@ block default
                   div.uk-text-meta.uk-text-xsmall.uk-text-truncate= category.comment
 
       div.uk-margin.uk-text-center
-        +link-to-all("see all categories", "/catalog.html")
+        +link-to-all("see all categories", "catalog.html")
 
   //- Trending
   section.uk-section.uk-section-small
@@ -81,7 +81,7 @@ block default
             - count++;
 
       div.uk-margin.uk-text-center
-        +link-to-all("shop all", "/subcategory.html")
+        +link-to-all("shop all", "subcategory.html")
 
   //- Brands
   section.uk-section.uk-section-default.uk-section-small
@@ -125,7 +125,7 @@ block default
                  "uk-hidden@m")
 
       div.uk-margin.uk-text-center
-        +link-to-all("see all brands", "/brands.html")
+        +link-to-all("see all brands", "brands.html")
 
   //- Blog
   section.uk-section.uk-section-small
@@ -144,7 +144,7 @@ block default
             +article(article)
 
       div.uk-margin.uk-text-center
-        +link-to-all("see all articles", "/blog.html")
+        +link-to-all("see all articles", "blog.html")
 
   //- About & News
   section.uk-section.uk-section-default.uk-section-small
@@ -162,7 +162,7 @@ block default
           p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at neque vulputate, vestibulum magna in, accumsan urna. Nulla feugiat ipsum ex, molestie porttitor nibh faucibus at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam hendrerit lorem ut finibus semper. Donec ac vehicula erat, nec consequat massa.
           p Quisque rhoncus fermentum sapien id congue. Nam at rutrum turpis. Aliquam sagittis imperdiet tortor vel dignissim. Ut ipsum nunc, egestas et odio id, vestibulum posuere orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
           div(class="uk-text-center uk-text-left@s")
-            +link-to-all("read more", "/about.html")
+            +link-to-all("read more", "about.html")
 
         //- News
         section
@@ -185,7 +185,7 @@ block default
                       div.uk-margin-xsmall-top.uk-text-small!= article.description
 
           div(class="uk-margin uk-text-center uk-text-left@s")
-            +link-to-all("see all news", "/news.html")
+            +link-to-all("see all news", "news.html")
 
   //- Subscribe
   section.uk-section.uk-section-primary.uk-section-small.uk-light
