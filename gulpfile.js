@@ -95,7 +95,7 @@ gulp.task('server', function() {
   sync.init({
     notify: false,
     //ui: false,
-    tunnel: true,
+    //tunnel: true,
     server: {
       baseDir: 'dest'
     }
