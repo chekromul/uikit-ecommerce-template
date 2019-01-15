@@ -35,7 +35,7 @@ uikit-ecommerce-store/
 |   ├── scripts/
 │   |   ├── script.js
 |   ├── styles/
-│   |   ├── components
+│   |   ├── components/
 |   |   ├── style.less
 |   ├── templates/
 │   |   ├── components/
