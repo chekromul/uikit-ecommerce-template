@@ -4,6 +4,8 @@ Responsive e-commerce template containing catalog, filters, product page, shoppi
 
 Demo: https://chekromul.github.io/uikit-ecommerce-template
 
+Also you can see `Sass` port of this theme: [vkovic/uikit-computer-store-template](https://github.com/vkovic/uikit-computer-store-template) 
+
 [![UIkit E-commerce Template](https://raw.githubusercontent.com/chekromul/uikit-ecommerce-template/gh-pages/images/preview.png "UIkit E-commerce Template")](https://raw.githubusercontent.com/chekromul/uikit-ecommerce-template/gh-pages/images/preview.png "UIkit E-commerce Template")
 
 ## Overview
