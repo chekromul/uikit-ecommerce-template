@@ -55,7 +55,7 @@ To clone and run this project, you'll need [Git](https://git-scm.com) and [Node.
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/chekromul/uikit-ecommerce-template
+$ git clone https://github.com/chekromul/uikit-ecommerce-template.git
 
 # Go into the repository
 $ cd uikit-ecommerce-template
