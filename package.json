@@ -34,6 +34,6 @@
     "imagemin-pngquant": "^6.0.0"
   },
   "dependencies": {
-    "uikit": "^3.0.0-rc.10"
+    "uikit": "^3.4.1"
   }
 }
