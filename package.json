@@ -18,7 +18,7 @@
   "homepage": "https://github.com/chekromul/uikit-ecommerce-template",
   "devDependencies": {
     "autoprefixer": "^9.1.0",
-    "browser-sync": "^2.24.6",
+    "browser-sync": "^2.29.1",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-cache": "^1.0.2",
